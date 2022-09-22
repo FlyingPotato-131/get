@@ -10,14 +10,18 @@ def decbin(n):
     return [int(bit) for bit in bin(n)[2:].zfill(8)]
 
 try:
+    per = float(input('Введите период в мс '))/512000
     while(1):
         for i in range(256):
             gpio.output(dac, decbin(i))
-            sleep(0.001)
+            sleep(per)
         for i in range(256):
             gpio.output(dac, decbin(255 - i))
-            sleep(0.001)
+            sleep(per)
+except ValueError:
+    print("С каких пор это можно представить как период?")
 except KeyboardInterrupt:
+    print("")
     print("Вот это я понимаю треугольники")
 finally:
     gpio.output(dac, 0)
