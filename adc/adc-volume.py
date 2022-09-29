@@ -26,7 +26,8 @@ def adc():
 try:
     while(1):
         vlt = adc()
-        print(decbin(vlt), vlt*3.3/256)
+        res = ", Напряжение {outvlt:.2f} В"
+        print(decbin(vlt), res.format(outvlt=vlt*3.3/256))
         gpio.output(leds[8-int(vlt/29.444):8], 1)
         gpio.output(leds[0:8-int(vlt/29.444)], 0)
 except KeyboardInterrupt:
